@@ -14,6 +14,7 @@ bot.
 """
 
 import logging
+import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
@@ -23,6 +24,10 @@ logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s
 
 logger = logging.getLogger(__name__)
 
+
+def get_key():
+    with open('./secret.txt') as file:
+        return file.read().strip()
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
@@ -46,7 +51,8 @@ def main():
     # Create the Updater and pass it your bot's token.
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
-    updater = Updater("1312349426:AAHLm-vtdeb6dy3jUN4NMKJpvRCZGoXhFhY", use_context=True)
+    key = get_key()
+    updater = Updater(key, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
