@@ -26,8 +26,11 @@ logger = logging.getLogger(__name__)
 
 
 def get_key():
-    with open('./secret.txt') as file:
-        return file.read().strip()
+    if 'secret.txt' in os.listdir('./'):
+        with open('./secret.txt') as file:
+            return file.read().strip()
+    else:
+        return os.environ['TELEGRAM_BOT_KEY']
 
 # Define a few command handlers. These usually take the two arguments update and
 # context. Error handlers also receive the raised TelegramError object in error.
