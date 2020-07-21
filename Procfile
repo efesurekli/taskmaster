@@ -1,1 +1,1 @@
-web: python --log=DEBUG run.py
+web: python run.py
