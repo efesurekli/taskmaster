@@ -18,7 +18,7 @@ import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-PROD_URL = 'https://pmbot-taskmaster.herokuapp.com/bot'
+PROD_URL = 'https://pmbot-taskmaster.herokuapp.com/'
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -57,9 +57,8 @@ def main():
     # Make sure to set use_context=True to use the new context based callbacks
     # Post version 12 this will no longer be necessary
 
-    key = get_key()
-
-    updater = Updater(key, use_context=True)
+    token = get_key()
+    updater = Updater(token, use_context=True)
 
     # Get the dispatcher to register handlers
     dp = updater.dispatcher
@@ -80,8 +79,8 @@ def main():
             updater.start_polling()
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
-        updater.start_webhook(port=5000, listen='0.0.0.0', url_path='bot')
-        updater.bot.setWebhook(PROD_URL)
+        updater.start_webhook(port=5000, listen='0.0.0.0', url_path=token)
+        updater.bot.setWebhook(PROD_URL + token)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
