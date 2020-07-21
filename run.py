@@ -22,7 +22,7 @@ PROD_URL = 'https://pmbot-taskmaster.herokuapp.com'
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.DEBUG)
+                    level=logging.INFO)
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +80,7 @@ def main():
             updater.start_polling()
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
-        updater.start_webhook(webhook_url=PROD_URL, port=5000)
+        updater.start_webhook(webhook_url=PROD_URL, port=5000, listen='0.0.0.0')
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
