@@ -18,7 +18,7 @@ import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-PROD_URL = 'https://pmbot-taskmaster.herokuapp.com/'
+PROD_URL = 'https://pmbot-taskmaster.herokuapp.com'
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
@@ -76,6 +76,7 @@ def main():
         env = os.environ['ENV']
         logger.log(msg=f'env = {env}', level=logging.INFO)
         if env == 'dev':
+            # updater.start_webhook(port=5000)
             updater.start_polling()
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
