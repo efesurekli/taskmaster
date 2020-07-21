@@ -18,11 +18,11 @@ import os
 
 from telegram.ext import Updater, CommandHandler, MessageHandler, Filters
 
-PROD_URL = 'https://pmbot-taskmaster.herokuapp.com'
+PROD_URL = 'https://pmbot-taskmaster.herokuapp.com/bot'
 
 # Enable logging
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-                    level=logging.INFO)
+                    level=logging.DEBUG)
 
 logger = logging.getLogger(__name__)
 
@@ -80,7 +80,7 @@ def main():
             updater.start_polling()
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
-        updater.start_webhook(webhook_url=PROD_URL, port=5000, listen='0.0.0.0')
+        updater.start_webhook(webhook_url=PROD_URL, port=5000, listen='0.0.0.0', url_path='bot')
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
