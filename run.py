@@ -79,7 +79,7 @@ def main():
             updater.start_polling()
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
-        updater.start_webhook(webhook_url=PROD_URL)
+        updater.start_webhook(webhook_url=PROD_URL, port=5000)
 
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
