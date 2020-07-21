@@ -80,14 +80,17 @@ def main():
 
     else:
         logger.log(msg=f'env = prod', level=logging.INFO)
-        updater.start_webhook(port=5000, listen='0.0.0.0', url_path=token)
+        # heroku dynamically assigns port so you have to get from the env obv.
+        # url_path and set_webhook ala https://github.com/python-telegram-bot/python-telegram-bot/wiki/Webhooks#heroku
+        updater.start_webhook(port=int(os.environ.get('PORT', '5000')), listen='0.0.0.0', url_path=token)
         updater.bot.set_webhook(PROD_URL + token)
 
     updater.idle()
 
+
     # Run the bot until you press Ctrl-C or the process receives SIGINT,
     # SIGTERM or SIGABRT. This should be used most of the time, since
-    # start_polling() is non-blocking and will stop the bot gracefully.
+    # start_polling() is     non-blocking and will stop the bot gracefully.
 
 
 
